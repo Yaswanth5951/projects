@@ -13,5 +13,14 @@ pipeline {
                 }
             }
         }
+        stage('intializing terraform'){
+            steps{
+                script{
+                    dir('AWS-EKS-CLUSTER'){
+                        sh 'terraform init'
+                    }
+                }
+            }
+        }
     }
 }
