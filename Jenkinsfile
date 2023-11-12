@@ -22,5 +22,23 @@ pipeline {
                 }
             }
         }
+        stage("alignment the terraform"){
+            steps{
+                script{
+                    dir('AWS-EKS-CLUSTER'){
+                        sh "terraform fmt"
+                    }
+                }
+            }
+        }
+        stage("validating terraform"){
+            steps{
+                script{
+                    dir('AWS-EKS-CLUSTER'){
+                        sh "terraform validate"
+                    }
+                }
+            }
+        }
     }
 }
