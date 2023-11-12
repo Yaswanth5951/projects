@@ -22,7 +22,7 @@ pipeline {
                 }
             }
         }
-        stage("alignment the terraform"){
+        stage("alignment the terraform code"){
             steps{
                 script{
                     dir('AWS-EKS-CLUSTER'){
@@ -31,11 +31,41 @@ pipeline {
                 }
             }
         }
-        stage("validating terraform"){
+        stage("validating terraform code"){
             steps{
                 script{
                     dir('AWS-EKS-CLUSTER'){
                         sh "terraform validate"
+                    }
+                }
+            }
+        }
+        stage('previewing terraform infra'){
+            steps{
+                script{
+                    dir('AWS-EKS-CLUSTER'){
+                        sh 'terraform plan'
+                    }
+                    input(message: "are you sure to proceed?", ok: "proceed")
+                }
+            }
+        }
+        stage('creating/destroying EKS cluster'){
+            steps{
+                script{
+                    dir('AWS-EKS-CLUSTER'){
+                        sh 'terraform $action --auto-approve'
+                    }
+                }
+            }
+        }
+        stage('deploying application'){
+            steps{
+                script{
+                    dir('AWS-EKS-CLUSTER/manifestFiles'){
+                        sh 'aws eks updating-kubeconfig --name my-eks-cluster'
+                        sh 'kubectl apply -f deployment.yaml'
+                        sh 'kubectl apply -f service.yaml'
                     }
                 }
             }
