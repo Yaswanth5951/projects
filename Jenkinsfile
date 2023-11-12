@@ -2,7 +2,7 @@ pipline {
     agent any
     environment {
         AWS_ACCESS_KEY_ID = credentias('AWS_ACCESS_KEY_ID')
-        AWS_SECRET_KEY_ID = credentias('AWS_SECRET_KEY_ID')
+        AWS_SECRET_ACCESS_KEY  = credentias('AWS_SECRET_ACCESS_KEY')
         AWS_DEFAULT_REGION = "ap-northeast-3"
     }
     stages {
