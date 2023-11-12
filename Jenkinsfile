@@ -1,4 +1,4 @@
-pipline {
+pipeline {
     agent any
     environment {
         AWS_ACCESS_KEY_ID = credentias('AWS_ACCESS_KEY_ID')
