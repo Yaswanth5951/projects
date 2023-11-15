@@ -4,7 +4,7 @@ vpc_cidr = "10.10.0.0/16"
 subnet_names = [ "app-subnet-1","app-subnet-2" ]
 subnet_azs = ["a","b"]
 public_key_path = "~/.ssh/id_rsa.pub"
-instance_size = "t2.micro"
+instance_size = "t2.small"
 ami_id = "ami-0690c54203f5f67da"
 }
 jenkins-server-sg = {
