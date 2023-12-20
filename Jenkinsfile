@@ -54,7 +54,7 @@ pipeline {
             steps{
                 script{
                     dir('AWS-EKS-CLUSTER'){
-                        sh 'terraform $action -var-file=./values.tfvars --auto-approve'
+                        sh 'terraform apply -var-file=./values.tfvars --auto-approve'
                     }
                 }
             }
