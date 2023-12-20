@@ -3,7 +3,7 @@ pipeline {
     environment {
         AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY  = credentials('AWS_SECRET_ACCESS_KEY')
-        AWS_DEFAULT_REGION = "ap-northeast-3"
+        AWS_DEFAULT_REGION = "us-west-2"
     }
     stages {
         stage('Checkout SCM'){
@@ -55,6 +55,7 @@ pipeline {
                 script{
                     dir('AWS-EKS-CLUSTER'){
                         sh 'terraform apply -var-file=./values.tfvars --auto-approve'
+
                     }
                 }
             }
